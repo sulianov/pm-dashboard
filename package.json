@@ -1,0 +1,11 @@
+{
+  "name": "pm-dashboard-tests",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run --reporter=verbose"
+  },
+  "devDependencies": {
+    "vitest": "^4.0.0"
+  }
+}
