@@ -2,6 +2,8 @@
 
 A local single-page dashboard for technical project managers working with Jira, GitHub, and Azure DevOps.
 
+![Screenshot](pm-dashboard.png)
+
 | File | Purpose |
 |---|---|
 | `dashboard.html` | Single-page app — all views and widgets |
