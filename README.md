@@ -39,7 +39,7 @@ Click any team member to see their tickets, fix versions, sprint burn, and 30-da
 | `dashboard.html` | Single-page app — all views and widgets |
 | `proxy.py` | Local Python proxy — forwards requests to Jira and GitHub Models |
 | `config.json` | Instance configuration — field IDs, workflow statuses, issue types, branding |
-| `roles.example.json` | Local person directory — name, role, country for each team member. Fill in with real rosrer, renam to roles.json and place to root |
+| `roles.example.json` | Sample person directory. Copy to `roles.json` and fill in with your real roster. |
 | `boards.json` | Jira board IDs used for sprint queries |
 
 ---
