@@ -39,7 +39,7 @@ Click any team member to see their tickets, fix versions, sprint burn, and 30-da
 | `dashboard.html` | Single-page app — all views and widgets |
 | `proxy.py` | Local Python proxy — forwards requests to Jira and GitHub Models |
 | `config.json` | Instance configuration — field IDs, workflow statuses, issue types, branding |
-| `roles.json` | Local person directory — name, role, country for each team member |
+| `roles.example.json` | Local person directory — name, role, country for each team member. Fill in with real rosrer, renam to roles.json and place to root |
 | `boards.json` | Jira board IDs used for sprint queries |
 
 ---
@@ -192,7 +192,7 @@ Clicking **🤖** on any D3 or D4 ticket sends a request to GitHub Models (`gpt-
 
 ## roles.json
 
-Local file that enriches the roster with role titles and countries. Not committed to git (add to `.gitignore` if sensitive).
+Local file that enriches the roster with role titles and countries. Not committed to git.
 
 Format:
 ```json
@@ -241,9 +241,9 @@ All instance-specific values are isolated in `config.json`. Edit this file to ad
     "jiraBasePlaceholder": "https://..."   // placeholder in config bar
   },
   "fields": {
-    "storyPoints":        "customfield_10006",
-    "sprint":             "customfield_10001",
-    "devOwner":           "customfield_10125",
+    "storyPoints":        "customfield_",
+    "sprint":             "customfield_",
+    "devOwner":           "customfield_",
     // ... see full list in config.json
   },
   "issueTypes": {
@@ -280,19 +280,19 @@ The proxy injects `config.json` as `window.JIRA_CFG` into the served HTML so all
 
 | Field | Custom field ID | `config.json` key |
 |---|---|---|
-| Story Points | `customfield_10006` | `fields.storyPoints` |
-| Sprint | `customfield_10001` | `fields.sprint` |
-| POD | `customfield_12904` | `fields.pod` |
-| Dev Owner | `customfield_10125` | `fields.devOwner` |
-| Analyst Due Date | `customfield_10304` | `fields.analystDue` |
-| Developer Due Date | `customfield_10305` | `fields.devDue` |
-| Team | `customfield_16304` | `fields.team` |
-| Severity | `customfield_10130` | `fields.severity` |
-| Solution Consultant | `customfield_14249` | `fields.solutionConsultant` |
-| Product | `customfield_10123` | `fields.product` |
-| Domain | `customfield_17813` | `fields.domain` |
-| Total Linked Cases | `customfield_17806` | `fields.linkedCases` |
-| Epic Link | `customfield_10002` | `fields.epicLink` |
+| Story Points | `customfield_` | `fields.storyPoints` |
+| Sprint | `customfield_` | `fields.sprint` |
+| POD | `customfield_` | `fields.pod` |
+| Dev Owner | `customfield_` | `fields.devOwner` |
+| Analyst Due Date | `customfield_` | `fields.analystDue` |
+| Developer Due Date | `customfield_` | `fields.devDue` |
+| Team | `customfield_` | `fields.team` |
+| Severity | `customfield_` | `fields.severity` |
+| Solution Consultant | `customfield_` | `fields.solutionConsultant` |
+| Product | `customfield_` | `fields.product` |
+| Domain | `customfield_` | `fields.domain` |
+| Total Linked Cases | `customfield_` | `fields.linkedCases` |
+| Epic Link | `customfield_` | `fields.epicLink` |
 
 ---
 
