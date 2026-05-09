@@ -1,8 +1,38 @@
 # PM Dashboard
 
-A local single-page dashboard for technical project managers working with Jira, GitHub, and Azure DevOps.
+A local single-page dashboard for technical project managers working with Jira, GitHub, and Azure DevOps. Built to replace a stack of saved JQL queries, half a dozen open Jira tabs, and the daily ritual of context-switching between domains, sprints, and people.
 
-![Screenshot](pm-dashboard.png)
+---
+
+## Highlights
+
+### 🤖 AI Suggest Owner — ranked candidates with reasoning
+Surfaces the top 5 assignment candidates per ticket with confidence scores, team-fit signals, and one-click write-back to Jira. Powered by GPT-4o (via GitHub Models) over Jira ticket metadata + live sprint state — domain match, current SP load, and recent delivery history.
+
+![AI Suggest Owner](docs/screenshots/04-ai-suggest-owner.png)
+
+### 🌐 Domain View — team velocity at a glance
+Sprint health and velocity rolled up by JPO portfolio domain, with live filtering by team, role, POD, and country. The right-hand stats panel slides open per team or per person without losing the list context.
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/screenshots/01-domain-team-overview.png" alt="Team overview — 30d velocity, active sprint burn, previous sprint delivered" /></td>
+    <td width="50%"><img src="docs/screenshots/02-domain-team-members.png" alt="Per-developer velocity breakdown with Jira deep-links" /></td>
+  </tr>
+  <tr>
+    <td><em>Team Stats — Overview tab.</em> 30-day delivered SP, per-dev average, daily rate, active and previous sprint burn.</td>
+    <td><em>Team Stats — Members tab.</em> Per-developer velocity with inline links straight into Jira.</td>
+  </tr>
+</table>
+
+### 👤 Person Stats — drill down to individual contribution
+Click any team member to see their tickets, fix versions, sprint burn, and 30-day velocity. Filter by status, issue type, and project to isolate exactly the work in scope.
+
+![Person Stats](docs/screenshots/03-domain-person-stats.png)
+
+---
+
+## What's in the repo
 
 | File | Purpose |
 |---|---|
@@ -19,7 +49,7 @@ A local single-page dashboard for technical project managers working with Jira, 
 ### 1 — Prerequisites
 - Python 3.x ([python.org/downloads](https://www.python.org/downloads/))
 - Jira Personal Access Token (PAT) — your Jira instance → Profile → Personal Access Tokens
-- *(Optional)* GitHub PAT for AI owner suggestions — see [AI suggest owner](#ai-suggest-owner)
+- *(Optional)* GitHub PAT for AI owner suggestions — see [AI suggest owner](#-ai-suggest-owner)
 
 ### 2 — Run the proxy
 Open a terminal in this folder and run:
@@ -55,13 +85,13 @@ Fill in the config bar at the top:
 
 ## Views
 
-### Daily Priorities, Sprint View, Sprint Health, Project Stats
-Standard views — see in-app widgets.
+### Daily Priorities · Sprint View · Sprint Health · Project Stats
+Standard PM views — see in-app widgets.
 
 ### PR Finder
 Search GitHub and Azure DevOps for PRs matching a Jira ticket key. See [PR Finder](#pr-finder) below.
 
-### Domain tab (primary active view)
+### Domain tab — primary active view
 
 Four widgets driven from the JPO Portfolio API + Jira:
 
@@ -73,6 +103,8 @@ Four widgets driven from the JPO Portfolio API + Jira:
 | **D4 — Ready for Build** | RFB tickets awaiting assignment or sprint |
 
 #### D1 — Team Roster
+*See [Domain View screenshots](#-domain-view--team-velocity-at-a-glance) above.*
+
 - Expandable team blocks listing every member
 - Each row shows: display name · Jira username · role title · country flag
 - Role and country data sourced from `roles.json`
@@ -81,6 +113,8 @@ Four widgets driven from the JPO Portfolio API + Jira:
   - *Members tab*: per-developer breakdown with inline Jira links on all SP values
 
 #### D2 — Work by Person
+*See [Person Stats screenshot](#-person-stats--drill-down-to-individual-contribution) above.*
+
 - **Dev rows** appear first (Engineers, Tech Leads), sorted A→Z
 - **Non-dev rows** appear below at reduced opacity with an italic label
 - Each person header shows:
@@ -99,13 +133,15 @@ Four widgets driven from the JPO Portfolio API + Jira:
 - Sortable by severity, team, POD, sprint, dev owner, dev due
 - Filter bar: team · POD
 - Inline edit: Dev Due · Sprint · Dev Owner
-- **🤖 Suggest Owner** button per row (see below)
+- **🤖 Suggest Owner** button per row — see [AI suggest owner](#-ai-suggest-owner)
 
 #### D4 — Ready for Build
+*See [AI Suggest Owner screenshot](#-ai-suggest-owner--ranked-candidates-with-reasoning) above.*
+
 - Sortable by team, POD, sprint, dev owner, dev due, dependency
 - Filter bar: key/summary · team · POD
 - Inline edit: Dev Due · Sprint · Team · Dev Owner
-- **🤖 Suggest Owner** button per row (see below)
+- **🤖 Suggest Owner** button per row — see [AI suggest owner](#-ai-suggest-owner)
 
 ---
 
@@ -134,9 +170,9 @@ Both tokens are stored in `sessionStorage` and cleared on tab close.
 
 ---
 
-## AI suggest owner
+## 🤖 AI suggest owner
 
-Clicking **🤖** on any D3 or D4 ticket sends a request to GitHub Models (`gpt-4o`) via the local proxy.
+Clicking **🤖** on any D3 or D4 ticket sends a request to GitHub Models (`gpt-4o`) via the local proxy. The panel that opens — pictured at the top of this README — ranks the top 5 candidates with confidence scores and short, citable reasoning.
 
 **Payload sent to the model:**
 - Ticket key, summary, type, domain, team, POD
